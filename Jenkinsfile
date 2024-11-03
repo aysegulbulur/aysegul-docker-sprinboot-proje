@@ -53,7 +53,7 @@ pipeline {
         stage('Docker Login') {
             steps {
                 sh 'echo Docker Login...'
-                withCredentials([string(credentialsId: 'DockerId', variable: 'Dockerpwd')]) {
+                withCredentials([string(credentialsId: 'GithubToken', variable: 'Dockerpwd')]) {
                     sh "docker login -u aysegulbulur -p ${Dockerpwd}"
                 }
             }
