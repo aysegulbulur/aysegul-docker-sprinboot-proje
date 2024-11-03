@@ -10,7 +10,7 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                sh 'echo Projeyi GitHub'dan cek'
+                sh 'echo Projeyi GitHub dan cek'
                 git "${GITHUB_REPO}"
             }
         }
