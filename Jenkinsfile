@@ -46,7 +46,7 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 sh 'echo Build Docker image...'
-                sh "docker build -t ${REGISTRY}/${IMAGE_NAME}:latest ."
+                sh 'docker build -t ${REGISTRY}/${IMAGE_NAME}:latest .'
             }
         }
 
@@ -54,7 +54,7 @@ pipeline {
             steps {
                 sh 'echo Docker Login...'
                 withCredentials([string(credentialsId: 'GithubToken', variable: 'Dockerpwd')]) {
-                    sh "docker login -u aysegulbulur -p ${Dockerpwd}"
+                    sh 'docker login -u aysegulbulur -p ${Dockerpwd}'
                 }
             }
         }
@@ -62,14 +62,14 @@ pipeline {
         stage('Docker Push') {
             steps {
                 sh 'echo Docker Push...'
-                sh "docker push ${REGISTRY}/${IMAGE_NAME}:latest"
+                sh 'docker push ${REGISTRY}/${IMAGE_NAME}:latest'
             }
         }
 
         stage('Run Docker Image') {
             steps {
                 sh 'echo Running Docker image...'
-                sh "docker run -d --name ${IMAGE_NAME}-container ${REGISTRY}/${IMAGE_NAME}:latest"
+                sh 'docker run -d --name ${IMAGE_NAME}-container ${REGISTRY}/${IMAGE_NAME}:latest'
             }
         }
 
