@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        REGISTRY = 'local-registery' 
+        REGISTRY = 'localhost:5000'  // Yerel kayıt defterinin URL'si
         IMAGE_NAME = 'my-java-app-image'   
         GITHUB_REPO = 'https://github.com/aysegulbulur/aysegul-docker-sprinboot-proje.git'
     }
@@ -47,15 +47,6 @@ pipeline {
             steps {
                 sh 'echo Build Docker image...'
                 sh 'docker build -t ${REGISTRY}/${IMAGE_NAME}:latest .'
-            }
-        }
-
-        stage('Docker Login') {
-            steps {
-                sh 'echo Docker Login...'
-                withCredentials([string(credentialsId: 'DockerId', variable: 'Dockerpwd')]) {
-                    sh 'docker login -u aysegulbulur -p ${Dockerpwd}'
-                }
             }
         }
 
